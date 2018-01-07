@@ -1,0 +1,25 @@
+<%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+
+<h1>Ventas</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Ticket</th>
+    
+      <th>Total</th>
+      <th colspan="3">Detalle</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ventas.each do |venta| %>
+      <tr>
+        <td><%= venta.ticket %></td>
+       
+        <td><%= venta.total %></td>
+        <td><%= button_to 'Ver', negocio_venta_detalle_ventas_path(@negocio,venta), method: :get,class: 'btn btn-warning btn-sm' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

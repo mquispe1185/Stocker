@@ -1,0 +1,19 @@
+
+
+    
+    <%= form_for(:admin, url: login_admin_path, html: {class: "miform form-inline"}) do |f| %>
+		<h4>Login para administradores</h4>
+    <div class="form-group">
+     
+      <%= f.text_field :usuario,class: "form-control",placeholder: "admin" %>
+      <%= f.password_field :password,class: "form-control",placeholder: "contraseña" %>
+       <%= f.submit "Log in",class: "btn btn-primary"%>
+		</div>
+    
+		
+		
+    <% end %>
+
+    
+ 
+

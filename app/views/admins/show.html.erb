@@ -1,0 +1,34 @@
+
+ <% if @admin.negocios.any? %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Direccion</th>
+     
+      <th colspan="3">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin.negocios.each do |negocio| %>
+      <tr>
+        <td><%= negocio.nombre %></td>
+        <td><%= negocio.direccion %></td>
+       
+        <td><%=  button_to 'Ir a administracion', negocio, method: :get,class: 'btn btn-warning btn-sm' %></td>
+        <td><%= button_to 'Editar', edit_negocio_path(negocio),method: :get, class: 'btn btn-primary btn-sm' %></td>
+        <td><%= button_to 'Eiminar', negocio_path(negocio,admin_id: negocio.admin.id), method: :delete,class: 'btn btn-danger btn-sm', data: { confirm: 'Seguro desea eliminar este negocio?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%else%>
+<h4>Aun no ha creado ningun negocio, creeelo ahora :)</h4>
+<%end%>
+<br>
+
+<%= link_to 'Crear negocio', new_negocio_path(admin_id:@admin) %>
+
+<%= link_to 'Editar datos admin', edit_admin_path(@admin) %> |
+

@@ -1,0 +1,84 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" >
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbaruser" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Stocker</a>
+        </div>
+        <div id="navbaruser" class="navbar-collapse collapse" align="right">
+            <ul class="nav navbar-nav navbar-right">
+                <li><%= link_to current_horario.created_at.strftime("%d/%m/%Y %H:%M"),   '#' %></li>
+                <li><a href="#"><label for="hora_actual"></label></a></li>
+                <li><%= link_to @current_user.negocio.nombre,   '#' %></li>      
+                <li>
+                  <%= link_to @current_user.nombre, negocio_usuario_path(@current_user.negocio,@current_user)%>
+                </li>
+                <li><button class="btn btn-primary top-button btn-logout">Logout</button></li>
+                
+            </ul>
+           
+         
+        </div><!--/.navbar-collapse -->
+      </div>
+</nav>
+
+<script type="text/javascript" charset="utf-8">
+//$('#hora_actual').val("hola");
+ $(document).ready(function() {
+      var to = null;
+      var duracion = '00:00:00';
+      var hora = ('<%= current_horario.created_at.strftime("%Y-%m-%d %H:%M")%>').toString();
+      console.log(hora);
+      var inicio = new Date(hora);
+      var final = new Date();
+
+
+      function ver_duracion(){
+       final = new Date();
+      console.log(inicio);
+      console.log(final);
+      var diff =(final.getTime() - inicio.getTime());
+       var difSeg = Math.floor(diff/1000); //diferencia en segundos
+
+      var segundos = difSeg % 60; //segundos
+      var difMin = Math.floor(difSeg/60); //diferencia en minutos
+      var minutos = difMin % 60; //minutos
+      var difHs = Math.floor(difMin/60); //diferencia en horas
+      var horas = difHs % 24; //horas
+      if (horas<10){
+        horas = '0'+horas;
+        console.log(horas);
+      }
+      if (minutos<10){
+        minutos = '0'+minutos;
+      }
+      duracion = horas+':'+minutos;
+     jQuery("label[for='hora_actual']").html(duracion);
+     to = setTimeout(ver_duracion, 60000);
+   }
+
+    setTimeout(ver_duracion, 1000);
+
+     $('.btn-logout').click(function(event){
+          event.preventDefault();
+         
+             $.ajax({
+                   type:    "DELETE",
+                   url:     "<%= logout_path() %>",
+                   data:    {final: final, duracion: duracion},
+                   success: function(post){ clearTimeout(to);            
+                    },
+                   error:   function(post){ console.log(this) }
+                 });
+              
+          //alert("boton presionado");
+
+         
+     });
+    })
+
+</script>

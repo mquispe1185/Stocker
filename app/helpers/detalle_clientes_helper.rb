@@ -1,0 +1,2 @@
+module DetalleClientesHelper
+end

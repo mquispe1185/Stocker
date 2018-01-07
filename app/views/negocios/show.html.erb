@@ -1,0 +1,73 @@
+<%= render 'menu_negocio',negocio: @negocio %>
+<table class="table">
+  <thead>
+    <th colspan="1"></th>
+    <th>Descripcion</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Nombre:</strong></td>
+      <td><%= @negocio.nombre %></td>
+    </tr>
+
+    <tr>
+      <td> <strong>Dirección:</strong></td>
+      <td> <%= @negocio.direccion %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Teléfono:</strong></td>
+      <td><%= @negocio.telefono %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Cuit/Cuil:</strong></td>
+      <td><%= @negocio.cuit %></td>
+    </tr>
+
+     <tr>
+      <td><strong>Alta:</strong></td>
+      <td><%= @negocio.alta %></td>
+    </tr>
+    <tr>
+      <td> <strong>Expiracion licencia:</strong></td>
+      <td> <%= @negocio.expiracion_licencia %></td>
+    </tr>
+    <tr>
+      <td><strong>Validado:</strong></td>
+      <td><%= @negocio.validado %></td>
+    </tr>
+    <tr>
+      <td><strong>Administrador:</strong></td>
+      <td><%= @negocio.admin.nombre %></td>
+    </tr>
+   
+  </tbody>
+ 
+</table>
+<h4>Notificaciones</h4>
+
+<% if @poco > 0 %>
+<div style="background-color:#fcc2c2;">
+  <li>Existe/n <%=@poco%> producto/s con poco stock <%= link_to 'Revise aqui', negocio_productos_path(@negocio) %></li>
+</div>
+
+<%else%>
+<div style="background-color:#92fc94;">
+  <li>sin novedad en stock</li>
+</div>
+<%end%>
+
+<% if @caja_abierta > 0 %>
+<div style="background-color:#fcc2c2;">
+  <li>Existe/n <%=@caja_abierta%> cierre/s de caja que los usuarios no realizaron <%= link_to 'Revise aqui', negocio_historico_cierres_path(@negocio) %></li>
+</div>
+
+<%else%>
+<div style="background-color:#92fc94;">
+  <li>sin novedad en cierres de caja</li>
+</div>
+<%end%>
+
+<%= link_to 'Edit', edit_negocio_path(@negocio) %> |
+<%= link_to 'Atras', admin_path(@negocio.admin) %>

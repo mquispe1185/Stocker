@@ -1,0 +1,34 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Descripcion</th>
+     
+      <th>Monto Adeudado</th>
+      <th colspan="3">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% if @cuentas.nil? %>
+  <tr>
+    <td>No existen cuenta de  proveedores</td>
+  </tr>
+  <% else %>
+    <% @cuentas.each do |cuenta| %>
+      <tr>
+        <td><%= cuenta.proveedor.nombre %></td>
+    
+        <td>$<%= cuenta.monto_adeudado %></td>
+
+
+         <td><%= button_to 'Pagar', new_negocio_pago_proveedore_path(@negocio,cuenta),method: :get, class: 'btn btn-info btn-sm' %></td>
+
+         <td><%= button_to 'Ver pagos realizados', negocio_pago_proveedores_path(@negocio,cuenta),method: :get, class: 'btn btn-warning btn-sm' %></td>
+
+
+       
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Pago Clientes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cuenta cliente</th>
+      <th>Monto</th>
+      <th>Usuario</th>
+      <th>Observacion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pago_clientes.each do |pago_cliente| %>
+      <tr>
+        <td><%= pago_cliente.cuenta_cliente %></td>
+        <td><%= pago_cliente.monto %></td>
+        <td><%= pago_cliente.usuario %></td>
+        <td><%= pago_cliente.observacion %></td>
+        <td><%= link_to 'Show', pago_cliente %></td>
+        <td><%= link_to 'Edit', edit_pago_cliente_path(pago_cliente) %></td>
+        <td><%= link_to 'Destroy', pago_cliente, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pago Cliente', new_pago_cliente_path %>

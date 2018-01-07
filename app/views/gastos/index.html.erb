@@ -1,0 +1,10 @@
+<%= render 'negocios/menu_negocio',negocio: @negocio %>
+
+<h4>Gastos</h4>
+
+<%= render 'form_busqueda',negocio: @negocio %>
+
+<div id="tabla_historicos">
+  <%= render 'tabla_historicos',gastos: @gastos %>
+</div>
+

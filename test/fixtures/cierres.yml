@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  usuario: one
+  hora_inicial: 2017-12-02 22:42:03
+  hora_final: 2017-12-02 22:42:03
+  monto_inicial: 9.99
+  monto_final: 9.99
+  estado: false
+  rendido: false
+  fecha: 2017-12-02
+  observacion: MyString
+  caja: one
+  negocio: one
+
+two:
+  usuario: two
+  hora_inicial: 2017-12-02 22:42:03
+  hora_final: 2017-12-02 22:42:03
+  monto_inicial: 9.99
+  monto_final: 9.99
+  estado: false
+  rendido: false
+  fecha: 2017-12-02
+  observacion: MyString
+  caja: two
+  negocio: two

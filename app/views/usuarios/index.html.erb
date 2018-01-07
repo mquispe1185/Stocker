@@ -1,0 +1,34 @@
+<%= render 'negocios/menu_negocio',negocio: @negocio %>
+<h4>Gestion de Usuarios</h4>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Usuario</th>
+      <th>Password</th>
+      <th>Nombre</th>
+    
+      <th>Rol</th>
+      <th colspan="2">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @negocio_usuarios.each do |usuario| %>
+      <tr>
+        <td><%= usuario.usuario %></td>
+        <td> ***** </td>
+        <td><%= usuario.nombre %></td>
+       
+        <td><%= usuario.rol %></td>
+         <td><%= button_to 'Editar', edit_negocio_usuario_path(@negocio,usuario),method: :get, class: 'btn btn-primary btn-sm' %></td>
+        <td><%= button_to 'Eiminar', negocio_usuario_path(@negocio,usuario), method: :delete,class: 'btn btn-danger btn-sm', data: { confirm: 'Seguro desea eliminar este usuario?' } %></td>
+      
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

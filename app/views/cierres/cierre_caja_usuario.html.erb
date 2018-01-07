@@ -1,0 +1,51 @@
+<%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+<% if current_cierre.nil? %>
+     <h4>No existen caja abiertas para cerrar, abra una!</h4>
+<%else %>
+<h5>Cierre de caja diario N° <%= @cierre.id %></h5>
+<h5>Usuario: <%= @current_user.nombre %></h5>
+
+<table class="table">
+	<thead>
+		<th colspan="1"></th>
+		<th>Monto $</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td><strong>Monto Inicial:</strong></td>
+			<td>$<%= @cierre.monto_inicial %></td>
+		</tr>
+
+		<tr>
+			<td><strong>Total ventas:</strong></td>
+			<td> $<%= @total_caja %></td>
+		</tr>
+
+		<tr>
+			<td><strong>Pago ctas. clientes:</strong></td>
+			<td>$<%= @total_clientes %></td>
+		</tr>
+
+		<tr>
+			<td> <strong>Pago a proveedores:</strong></td>
+			<td> - $<%= @total_proveedores %></td>
+		</tr>
+		<tr>
+			<td> <strong>Total gastos:</strong></td>
+			<td> - $<%= @total_gastos %></td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td align="right"><label for="total"><strong>Total a rendir:</strong></label></td>
+			<td> $<%= @neto %></td>
+		</tr>
+	</tfoot>
+</table>
+
+
+
+ <div class="actions" align="center">
+ <%= button_to 'Cerrar Caja', negocio_realizar_cierre_path(@negocio, @cierre), method: :put,class: 'btn btn-info btn-sm', data: { confirm: 'Confirma el cierre de caja?' }, params: {neto: @neto, id: @cierre.id} %>
+ </div>
+ <% end %>

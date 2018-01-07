@@ -1,0 +1,25 @@
+<%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @cliente.nombre %>
+</p>
+
+<p>
+  <strong>Direccion:</strong>
+  <%= @cliente.direccion %>
+</p>
+
+<p>
+  <strong>Telefono:</strong>
+  <%= @cliente.telefono %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @cliente.email %>
+</p>
+
+<%= link_to 'Editar', edit_negocio_cliente_path(@negocio,@cliente) %> |
+<%= link_to 'Volver', new_negocio_cliente_path(@negocio) %>

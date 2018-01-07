@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cuenta_cliente: one
+  monto: 9.99
+  usuario: one
+  observacion: MyString
+
+two:
+  cuenta_cliente: two
+  monto: 9.99
+  usuario: two
+  observacion: MyString

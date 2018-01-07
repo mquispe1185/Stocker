@@ -1,0 +1,35 @@
+<%= form_for(gasto, url: negocio_gasto_path(@negocio), html: {class: "miform form-horizontal"}, remote: true) do |f| %>
+  <% if gasto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(gasto.errors.count, "error") %> prohibited this gasto from being saved:</h2>
+
+      <ul>
+      <% gasto.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :descripcion, class: "col-sm-4" %>
+    <%= f.text_field :descripcion, class: "col-sm-4" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :categoria_id, class: "col-sm-4" %>
+   <%= f.collection_select :categoria_id, Categoria.all, :id, :nombre, prompt: "Seleccine categoria", class: "col-sm-4" %>
+  </div>
+
+  <%= f.hidden_field :usuario_id, value: @current_user.id %>
+ 
+
+  <div class="form-group">
+    <%= f.label :monto, class: "col-sm-4" %>
+    <%= f.text_field :monto, class: "col-sm-4" %>
+  </div>
+
+   <div class="actions" align="center">
+    <%= f.submit "Actualizar",class: "btn btn-primary" %>
+  </div>
+<% end %>

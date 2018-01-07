@@ -1,0 +1,29 @@
+<%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+
+<h4>Pedido N°<%= @pedido.id%></h4>
+<h5>Proveedor: <%= @pedido.proveedor.nombre%> - Creado por: <%= @pedido.usuario.nombre%> </h5>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Codigo</th>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @detalle_pedidos.each do |detalle_pedido| %>
+      <tr>
+         <td><%= detalle_pedido.producto.codigo %></td>
+        <td><%= detalle_pedido.producto.descripcion %></td>
+        <td><%= detalle_pedido.cantidad %></td>
+      
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to 'Atras', negocio_pedidos_path(@negocio) %> 
+

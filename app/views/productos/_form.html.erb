@@ -1,0 +1,62 @@
+<%= form_for(producto,url: negocio_productos_path(negocio_id: producto.negocio_id), html: {class: "miform form-horizontal"}) do |f| %>
+  <% if producto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(producto.errors.count, "error") %> prohibited this producto from being saved:</h2>
+
+      <ul>
+      <% producto.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row field">
+    <%= f.label :codigo, class: "col-sm-4" %>
+    <%= f.text_field :codigo, class: "col-sm-4" %>
+  </div>
+
+  <div class="row field">
+    <%= f.label :descripcion, class: "col-sm-4" %>
+    <%= f.text_field :descripcion, class: "col-sm-4" %>
+  </div>
+
+ <div class="row field">
+    <%= f.label :stock, class: "col-sm-4" %>
+    <%= f.text_field :stock, class: "col-sm-4" %>
+  </div>
+
+  <div class="row field">
+    <%= f.label :minimo, class: "col-sm-4" %>
+    <%= f.text_field :minimo, class: "col-sm-4" %>
+  </div>
+  
+  <div class="row field">
+    <%= f.label :unidad, class: "col-sm-4" %>
+      <%= f.select :unidad, options_for_select([ "Unidad", "Kg", "Lts" ], "Unidad"), class: "col-sm-4" %>
+  </div>
+
+  <div class="row field">
+    <%= f.label :precio, class: "col-sm-4" %>
+    <%= f.text_field :precio, class: "col-sm-4" %>
+  </div>
+
+  <div class="row field">
+    <%= f.label :costo, class: "col-sm-4" %>
+    <%= f.text_field :costo, class: "col-sm-4" %>
+  </div>
+ 
+  <div class="row field">
+    <%= f.label :proveedor_id, class: "col-sm-4" %>
+     <%= f.collection_select :proveedor_id, Proveedor.where(negocio_id: @negocio.id), :id, :nombre, prompt: "Seleccine proveedor", class: "col-sm-4"%>
+  </div>
+  <div class="form-group">
+    <%= f.label :vencimiento, class: "col-sm-4" %>
+    <%= f.text_field :vencimiento, class: "col-sm-4" %>
+  </div>
+
+
+   <div class="actions" align="center">
+    <%= f.submit "Crear",class: "btn btn-primary" %>
+  </div>
+<% end %>

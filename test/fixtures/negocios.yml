@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  direccion: MyString
+  telefono: MyString
+  cuit: MyString
+  alta: 2017-11-28
+  expiracion_licencia: 2017-11-28
+  validado: false
+  admin: one
+
+two:
+  nombre: MyString
+  direccion: MyString
+  telefono: MyString
+  cuit: MyString
+  alta: 2017-11-28
+  expiracion_licencia: 2017-11-28
+  validado: false
+  admin: two

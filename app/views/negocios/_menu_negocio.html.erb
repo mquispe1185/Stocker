@@ -1,0 +1,73 @@
+<div class="container col-md-12">
+<div class="row">
+<nav class="navbar navbar-inverse" id="menuadmin">
+      <div class="container" id="containermenu">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-admin" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+         
+        </div>
+        <div id="navbar-admin" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav" id="navmenu">
+            <li><%= link_to negocio.nombre, negocio_url(negocio)%></li>
+                <li>
+                   
+                        <a class="dropdown-toggle" type="button" id="dropdownVarios" data-toggle="dropdown">
+                          Caja
+                          <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                          <li><%= link_to "Cierre de caja diario", negocio_cierres_url(negocio) %></li> 
+                          <li><%= link_to "Cierre cajas histotircos",negocio_historico_cierres_url(negocio) %></li>
+                          <li><%= link_to "Ver ventas de hoy",negocio_ventas_url(negocio) %></li>
+                          <li><%= link_to "Ventas historicos", negocio_historico_ventas_url(negocio) %></li>
+                          <li><%= link_to "Crear sub cajas",new_negocio_caja_url(negocio) %></li>   <li><%= link_to "Historicos sub cajas",'#' %></li>
+                        </ul>
+                        
+                 </li>
+                
+                <li>
+                   
+                        <a class="dropdown-toggle" type="button" id="dropdownVarios" data-toggle="dropdown">
+                          Usuario
+                          <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                          <li><%= link_to "Agregar",new_negocio_usuario_url(negocio) %></li> 
+                          <li><%= link_to "Administrar",negocio_usuarios_url(negocio) %></li>
+                          <li><%= link_to "Control horarios",   negocio_horarios_url(negocio) %></li> 
+                        </ul>
+                    
+                 </li>
+               
+               
+                 <li>
+                   
+                        <a class="dropdown-toggle" type="button" id="dropdownVarios" data-toggle="dropdown">
+                          Administracion
+                          <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                           <li><%= link_to "Stock", negocio_productos_url(negocio) %></li> 
+                          <li><%= link_to "Gastos", negocio_gastos_url(negocio) %></li> 
+                         
+                          <li><%= link_to "Cuentas clientes",negocio_cuenta_clientes_url(negocio) %></li>
+                          <li><%= link_to "Cuentas proveedores",negocio_cuenta_proveedors_url(negocio) %></li>
+                          <li><%= link_to "Gestionar formas de pago",new_negocio_tipo_pago_url(negocio) %></li>
+                          
+                          <li><%= link_to "Balances", negocio_balances_url(negocio) %></li>   
+                        </ul>
+                    
+                 </li>
+            </ul>
+           
+         
+        </div><!--/.navbar-collapse -->
+      </div>
+</nav>
+</div>
+</div>

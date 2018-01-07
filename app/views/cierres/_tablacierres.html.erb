@@ -1,0 +1,42 @@
+ <table class="table">
+  <thead>
+    <tr>
+      <th>Usuario</th>
+       <th>Fecha</th>
+      <th>Hora inicial</th>
+      <th>Hora final</th>
+      <th>Monto inicial</th>
+      <th>Monto final</th>
+     
+      <th>Rendido</th>
+     
+      <th>Observacion</th>
+  
+    
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cierres_historicos.each do |cierre| %>
+      <tr>
+        <td><%= cierre.usuario.nombre %></td>
+        <td><%= cierre.fecha.strftime("%d/%m/%Y")  %></td>
+        <td><%= cierre.hora_inicial.strftime("%H:%M") %></td>
+        <% if cierre.hora_final.nil?%>
+        <td>abierta</td>
+        <%else%>
+        <td><%= cierre.hora_final.strftime("%H:%M") %></td>
+        <%end%>
+        <td>$<%= cierre.monto_inicial %></td>
+        <td>$<%= cierre.monto_final %></td>
+       
+        <td><%= cierre.rendido %></td>
+        
+        <td><%= cierre.observacion %></td>
+       
+     
+     
+      </tr>
+    <% end %>
+  </tbody>
+</table>

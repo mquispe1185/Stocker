@@ -1,0 +1,152 @@
+<table class="table" id="tabla_lista_pedido">
+  <thead>
+    <tr>
+      <th>Codigo</th>
+      <th>Descripcion</th>
+      <th>cantidad</th>
+      <th colspan="3">Quitar de lista</th>
+    </tr>
+  </thead>
+
+  <tbody id="tbody">
+    
+  </tbody>
+   <tfoot id="tablafoot">
+   
+    <tr>
+    <td colspan="1" align="center"><button class="btn btn-danger btn_cancelar">Cancelar</button></td>
+   
+      <td colspan="1" align="center"><button class="btn btn-info btn_guardar">Guardar</button></td>
+
+    </tr>
+  </tfoot>
+</table>
+
+<h5>Productos de este proveedor</h5>
+<table class="table" id="tabla_prod">
+  <thead>
+    <tr>
+      <th>Codigo</th>
+      <th>Descripcion</th>
+      <th>Stock actual</th>
+      
+    
+      
+      <th colspan="2">Agregar al pedido</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% if @productos.nil? %>
+  <tr>
+    <td>Seleccione proveedor</td>
+  </tr>
+  <% else %>
+    <% @productos.each do |producto| %>
+       <% if producto.stock <= producto.minimo %>
+      <tr bgcolor= "#fcc2c2">
+       <% else %>
+       <tr>
+       <% end %>
+        <td hidden="hidden"><%= producto.id %></td>
+        <td><%= producto.codigo %></td>
+        <td><%= producto.descripcion %></td>
+        <td><%= producto.stock %></td>
+       
+
+       <td><%=  button_tag '+', type: 'button', onclick: "get_current_producto('#{producto.id}','#{producto.codigo}','#{producto.descripcion}')",class: 'btn btn-info btn-sm btn_add', id: "btn"+producto.codigo %></td>
+      
+      </tr>
+    <% end %>
+     <% end %>
+  </tbody>
+</table>
+
+<script type="text/javascript" charset="utf-8">
+    var prod= {};
+    var lista_pedido= [];
+    $(document).ready(function() {
+
+      var producto= {};
+      
+
+ 
+    //FUNCION QUE AGREGA EL PRODUCTO SELECCIONADO A LA LISTA_PEDIDO
+    // $('#tabla_prod').on('click','.btn_add', function(event){
+    //     event.preventDefault();
+    //     id = $(this).data('id');
+    //     alert("el id del prod es "+ id);
+    //     $(this).closest('tr').remove();
+    //     return false;
+    // });
+
+   
+
+ });
+    //FUNCION QUE TRASLADA LOS PRODUCTOS SELEECIONADOS A LA TABLA DE PEDIDOS
+    function get_current_producto(id, cod, desc){
+
+         $("#tbody").append('<tr><td hidden="hidden">'+id+'</td><td>'+cod+'</td><td>$'+desc+'</td><td class= "col-sm-2"><input id="cantidad_pedido" class="form-control" min="1" max="100" type= "number"></input></td><td><button class= "btn btn-danger btn-xs deleterow">X</button></td></tr>');
+        
+         $("#btn"+cod).closest('tr').remove();
+          prod = {producto_id: id, pedido_id: '<%=@pedido.id%>'};
+              lista_pedido.push(prod);
+         console.log(lista_pedido);
+       }
+
+     //FUNCION ENVIAR DETALLES AL CONTROLADOR DE VENTAS
+     $('.btn_guardar').click(function(event){
+          event.preventDefault();
+          if(lista_pedido.length > 0){
+
+             cargar_cantidades(); 
+             $.ajax({
+                   type:    "POST",
+                   url:     "<%= negocio_pedido_detalle_pedidos_path(@negocio,@pedido) %>",
+                   data:    {detalles: lista_pedido},
+                   success: function(post){ console.log("bien enviado");            
+                    },
+                   error:   function(post){ console.log(this) }
+                 });
+              
+          //alert("boton presionado");
+
+          }
+          else{ alert("no hay nada que guardar");}      
+     });
+
+     //funcion que elimina el presente pedido
+
+     $('.btn_cancelar').click(function(event){
+          event.preventDefault();
+         
+
+             lista_pedido =[];
+             $.ajax({
+                   type:    "DELETE",
+                   url:     "<%= negocio_pedido_path(@negocio,@pedido) %>",
+                   
+                   success: function(post){ console.log("bien ELIMINADO");            
+                    },
+                   error:   function(post){ console.log(this) }
+                 });
+              
+          //alert("boton presionado");
+     
+     });
+     function cargar_cantidades(){
+      var cant;
+        var tb = $("#tbody");
+        tb.find('tr').each(function (i){
+          var $tds = $(this).find('td'),
+            inp = $tds.eq(3).find('input');
+            cant = inp.val();
+            lista_pedido[i].cantidad = cant;
+            
+            alert("cantidad guardada: "+cant);
+        });
+        
+        console.log(lista_pedido);
+     }
+
+</script>

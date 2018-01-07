@@ -1,0 +1,2 @@
+module PagoProveedoresHelper
+end

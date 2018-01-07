@@ -1,0 +1,20 @@
+<%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @gasto.descripcion %>
+</p>
+
+<p>
+  <strong>Categoria:</strong>
+  <%= @gasto.categoria.nombre %>
+</p>
+
+
+
+<p>
+  <strong>Monto:</strong>
+  <%= @gasto.monto %>
+</p>
+
+<%= link_to 'Atrás', new_negocio_gasto_path(@negocio) %>

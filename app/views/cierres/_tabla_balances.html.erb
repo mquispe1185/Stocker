@@ -1,0 +1,33 @@
+<table class="table">
+	<thead>
+		<th colspan="1"></th>
+		<th>Monto $</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Ventas:</td>
+			<td>$<%= @ventas%></td>
+		</tr>
+
+		<tr>
+			<td>Gastos:</td>
+			<td>$<%= @gastos%></td>
+		</tr>
+
+		<tr>
+			<td>Pago de clientes:</td>
+			<td>$<%= @clientes%></td>
+		</tr>
+
+		<tr>
+			<td>Pago a proveedores:</td>
+			<td>$<%= @proveedores%></td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td align="right"><label for="total">Total:</label></td>
+			<td><%= @neto%></td>
+		</tr>
+	</tfoot>
+</table>

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cuenta proveedor:</strong>
+  <%= @pago_proveedore.cuenta_proveedor %>
+</p>
+
+<p>
+  <strong>Monto:</strong>
+  <%= @pago_proveedore.monto %>
+</p>
+
+<p>
+  <strong>Usuario:</strong>
+  <%= @pago_proveedore.usuario %>
+</p>
+
+<p>
+  <strong>Observacion:</strong>
+  <%= @pago_proveedore.observacion %>
+</p>
+
+<%= link_to 'Edit', edit_pago_proveedore_path(@pago_proveedore) %> |
+<%= link_to 'Back', pago_proveedores_path %>

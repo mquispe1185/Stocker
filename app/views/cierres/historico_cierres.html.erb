@@ -1,0 +1,10 @@
+<%= render 'negocios/menu_negocio',negocio: @negocio %>
+
+<h4>Cierres hitoricos</h4>
+
+<%= render 'form_busqueda',negocio: @negocio %>
+
+<div id="tablacierres">
+  <%= render 'tablacierres',cierres_historicos: @cierres_historicos %>
+</div>
+ 

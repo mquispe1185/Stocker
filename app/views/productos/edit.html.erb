@@ -1,0 +1,12 @@
+<% if logged_in_admin? %>
+        <%= render 'negocios/menu_negocio',negocio: @negocio %>
+<% elsif logged_in? %>
+      <%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+<% end %> 
+<h4>Editar Producto</h4>
+
+<%= render 'form_edit', producto: @producto %>
+
+|
+<%= link_to 'Ir a lista', negocio_productos_path(@negocio) %>
+

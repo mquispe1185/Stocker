@@ -1,0 +1,27 @@
+<%= form_for(pedido, url: negocio_pedidos_path(@negocio), html: {class: "miform form-horizontal"}) do |f| %>
+
+  <% if pedido.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pedido.errors.count, "error") %> prohibited this pedido from being saved:</h2>
+
+      <ul>
+      <% pedido.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <%= f.hidden_field :negocio_id, value: @negocio.id %>
+  <%= f.hidden_field :usuario_id, value: @current_user.id %>
+
+  <div class="field">
+    <%= f.collection_select :proveedor_id, Proveedor.where(negocio_id: @negocio.id), :id, :nombre, prompt: "Seleccine proveedor" %>
+  </div>
+
+ 
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

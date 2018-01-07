@@ -1,0 +1,7 @@
+<%= render 'negocios/menu_negocio',negocio: @negocio %>
+<h4>Editar datos del negocio</h4>
+
+<%= render 'form_edit', negocio: @negocio %>
+
+<%= link_to 'Show', @negocio %> |
+<%= link_to 'Atras', admin_path(@negocio.admin) %>

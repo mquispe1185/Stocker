@@ -1,0 +1,40 @@
+ <% if logged_in_admin? %>
+       <%= render 'negocios/menu_negocio',negocio: @negocio %>
+     <% else%>
+      <% if logged_in? %>
+     <%= render 'negocios/menu_negocio_usuario',negocio: @ventas.negocio_id %>
+    <% end %> 
+  <% end %> 
+<h4>Detalle Ventas N° <%= @ventas.ticket%></h4>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Codigo</th>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th>Modificador</th>
+      <th>Subtotal</th>
+     
+    
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @detalle_ventas.each do |detalle_venta| %>
+      <tr>
+        <td><%= detalle_venta.producto.codigo %></td>
+        <td><%= detalle_venta.producto.descripcion %></td>
+        <td><%= detalle_venta.cantidad %></td>
+        <td><%= detalle_venta.modificador %></td>
+        <td>$<%= detalle_venta.subtotal %>.00</td>
+        
+      
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to "Volver a ventas",negocio_ventas_usuario_url(@negocio) %>
+

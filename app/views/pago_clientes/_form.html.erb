@@ -1,0 +1,32 @@
+<%= form_for(pago_cliente, url:negocio_cuenta_cliente_pago_clientes_path(@negocio), html: {class: "miform form-horizontal"}) do |f| %>
+  <% if pago_cliente.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pago_cliente.errors.count, "error") %> prohibited this pago_cliente from being saved:</h2>
+
+      <ul>
+      <% pago_cliente.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :cuenta_cliente_id, value: @cuenta.id %>
+  <%= f.hidden_field :usuario_id, value: @current_user.id %>
+
+  <div class="field">
+    <%= f.label :monto %>
+    <%= f.text_field :monto %>
+  </div>
+
+ 
+
+  <div class="field">
+    <%= f.label :observacion %>
+    <%= f.text_field :observacion %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

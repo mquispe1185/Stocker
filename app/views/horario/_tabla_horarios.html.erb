@@ -1,0 +1,90 @@
+<table class="table" id="tablah">
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Usuario</th>
+      <th>Inicio</th>
+      <th>Final</th>
+      <th>Duracion</th>
+      
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @horarios.each do |horario| %>
+      <tr>
+        <td><%= horario.created_at.strftime("%d/%m/%Y") %></td>
+         <td><%= horario.usuario.nombre %></td>
+        <td><%= horario.created_at.strftime("%H:%M") %></td>
+        
+       
+        <td><%= horario.final.strftime("%H:%M") %></td>
+        <td><%= horario.duracion.strftime("%H:%M") %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr bgcolor="#92fc94">
+    <td colspan="3"></td>
+    <td align="right"><label for="totallbl">Total:</label></td>
+    <td><label for="total">tiempo</label></td>
+      
+    </tr>
+  </tfoot>
+</table>
+
+<script type="text/javascript" charset="utf-8">
+ $(document).ready(function() {
+
+  var table = $('#tablah').DataTable( {
+    "oLanguage": {
+      "sSearch": "Buscar:",
+      "sLengthMenu": "Mostrando _MENU_ registros",
+      "sInfo": "Ver página _PAGE_ de _PAGES_",
+      "sZeroRecords": "No hay registros que coincidan con la busqueda",
+      "sEmptyTable": "No hay datos que coincidan",
+      "oPaginate": {
+        "sPrevious": "Anterior",
+        "sNext": "Próxima"
+      }
+    }
+  } );
+
+  table.on('search.dt', function() {
+    //number of filtered rows
+    var totalmin = 0;
+  var totalhor = 0;
+    var columna = table.column(4, {order:'index', search:'applied'} ).data();
+    $.each(columna, function(k, v) {
+      var currentDuration = v+':00';
+        currentDuration = currentDuration.split(":");
+        var hrs = parseInt(currentDuration[0],10);
+        var min = parseInt(currentDuration[1],10);
+         
+        totalmin += min;
+        totalhor += hrs;
+        
+    
+  });
+    
+  var hours = Math.floor(totalmin / 60);
+  hours = totalhor + hours;
+  var minutes= totalmin % 60;
+    if (hours<10){
+        hours = '0'+hours;
+        console.log(hours);
+      }
+      if (minutes<10){
+        minutes = '0'+minutes;
+      }
+  jQuery("label[for='total']").html(hours+":"+minutes);
+   
+    console.log(hours+":"+minutes);
+                                      
+})              
+
+
+ })
+</script>

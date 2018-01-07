@@ -1,0 +1,185 @@
+<%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+
+<% if current_cierre.nil? or current_cierre.monto_inicial.nil?%>
+     <%= button_to 'Abrir Caja', login_path, method: :get, class: 'btn btn-info top-button'%>
+<%else %>
+<h4>Facturacion de <%= current_user.nombre%></h4>
+
+<%= form_for :producto do |f| %>
+<div class="form-group row">
+  	<div class="col-sm-5">
+     <%=f.autocomplete_field :producto_descripcion, autocomplete_producto_descripcion_negocio_ventas_path,class: 'form-control','data-noMatchesLabel' => 'no brands found'%>
+    </div>
+    <div class="col-sm-2" id="divprecio">
+    <%=f.text_field(:precio, placeholder: "0,0", class: 'form-control') %>
+    </div>
+    <div class="col-sm-2" id="divcantidad">
+  	<%= f.number_field :cant, min: 1,max: 100, class: 'form-control' %>
+    </div>
+    <div class="col-sm-2">
+  	<%= f.button '+',id: 'add', class: 'form-control btn btn-info btn-sm'%>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-5">
+      <%= f.collection_select :caja_id, Caja.where(negocio_id: @negocio.id), :id, :nombre, class: "col-sm-4"%>
+    </div>
+
+  </div>
+
+<% end %>
+
+<table class="table" id="tabladetalle">
+	<thead>
+		<tr>
+	      <th >Articulo</th>
+	      <th >Cant</th>
+	      <th >Subtotal</th>
+	    </tr>
+    
+	</thead>
+	<tbody id="tbody">
+		
+	</tbody>
+  <tfoot id="tablafoot">
+    <tr>
+    <td></td>
+      <td colspan="3" align="right"> <%= select("tipo", "pago", options_for_select(@tipo_pago.map {|p| [p.descripcion, p.id, {'data-mod' => p.modificador }]}), { selected: @tipo_pago.first })%></td>
+    </tr>
+    <tr>
+      <td colspan="3" align="right"><label for="labeltotal">Total:</label></td>
+
+    </tr>
+    <tr>
+      <td colspan="3" align="right"><button class="btn btn-info btn_enviar">Enviar</button></td>
+    </tr>
+  </tfoot>
+</table>
+<% end%>
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+    var detalle= {};
+    var detalles= [];
+ 		var precio;
+    var id;
+    var cantidad;
+    var subt;
+    var total;
+    var nuevototal;
+    var prod_stock_actual;
+
+    //FUNCION BORRAR DE TABLA EL DETALLE SELECCIONADO
+        $('#tabladetalle').on('click','.deleterow', function(event){
+        event.preventDefault();
+        var indice=$(this).closest('tr').index();
+        detalles.splice(indice,1);
+        console.log(detalles);
+        calcularTotal();
+        $(this).closest('tr').remove();
+        return false;
+    });
+
+     
+    $('#producto_producto_descripcion').focus();
+
+     //FUNCION AUTOCOMPLETE
+ 		$('#producto_producto_descripcion').bind('railsAutocomplete.select', function(event, data){
+       precio= data.item.precio;
+       id= data.item.id;
+      $('#producto_precio').val("$"+data.item.precio);
+        //$('#articulo_precio').next('input').focus();
+         //$(this).parent().next('#divcantidad').focus();
+         $('#producto_cant').focus().select()
+      });
+ 		 	
+
+      //FUNCION AGREGAR PRUDOCTO A LA TABLA
+     $("#add").click(function(event) {
+         event.preventDefault();
+        cantidad= parseFloat($('#producto_cant').val());
+        $.get( "<%= negocio_buscar_stock_path(@negocio) %>", { id: id } )
+            .done(function( data ) {
+            prod_stock_actual = data.stock;
+           
+              if(cantidad > prod_stock_actual){
+     
+          alert("No hay stock insuficiente por favor revise el listado de productos")
+        }
+        else{
+         
+         art =  $('#producto_producto_descripcion').val();   
+         subt= precio * cantidad;
+         detalle={id: id, cantidad: cantidad, importe: subt};
+         detalles.push(detalle);
+             
+       $('#tbody').append('<tr><td>'+art+'</td><td>'+cantidad+'</td><td>$'+subt+'</td><td><button class= "btn btn-danger btn-xs deleterow">X</button></td></tr>');
+        calcularTotal();
+        limpiarInputs();
+        
+        }
+        });
+
+      
+
+    });
+
+
+     //FUNCION ENVIAR DETALLES AL CONTROLADOR DE VENTAS
+     $('.btn_enviar').click(function(event){
+          event.preventDefault();
+          var caja_id = $("#producto_caja_id").val();
+          var tipo_pago = $("#tipo_pago").val();
+          if(detalles.length > 0){
+
+            $.ajax({
+                  type:    "POST",
+                  url:     "<%= negocio_ventas_path(@negocio) %>",
+                  data:    {detalles: detalles, total: nuevototal,caja_id: caja_id, tipo_pago: tipo_pago },
+                  success: function(post){ console.log(caja_id+".."+tipo_pago);resetForm();            
+                   },
+                  error:   function(post){ console.log(this) }
+                });
+              
+          //alert("boton presionado");
+
+          }
+          else{ alert("no hay nada que guardar");}      
+     });
+
+     function limpiarInputs(){
+        $('#producto_cant').val("1");
+        $('#producto_precio').val("");
+        $('#producto_producto_descripcion').focus().val("");
+     }
+
+    function calcularTotal(){
+      total= 0.0;
+      jQuery.each(detalles, function(i,val){
+        total = total+ val.importe;
+        nuevototal = total;
+      })
+      jQuery("label[for='labeltotal']").html("Total $"+total);
+      console.log('total:.:'+total);
+    }
+    function resetForm(){
+       $("#tbody").empty();
+       jQuery("label[for='labeltotal']").html("Total $ 0");
+       detalles=[];
+
+    }
+   
+   $('#tipo_pago').change(function() {
+      var selected = $(this).find('option:selected');
+      var extra = selected.data('mod');
+      var porcentaje = 1+(extra/100);
+      nuevototal = total*porcentaje; 
+      nuevototal = nuevototal.toFixed(2);
+      jQuery("label[for='labeltotal']").html("Total $"+nuevototal);
+      alert(nuevototal);
+
+   })
+
+   
+});
+</script>
+

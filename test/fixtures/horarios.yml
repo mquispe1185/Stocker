@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  usuario: one
+  final: 2017-12-23 21:15:37
+  duracion: 2017-12-23 21:15:37
+
+two:
+  usuario: two
+  final: 2017-12-23 21:15:37
+  duracion: 2017-12-23 21:15:37

@@ -1,0 +1,39 @@
+<%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+<h4>Datos del proveedor</h4>
+<p>
+  <strong>Nombre:</strong>
+  <%= @proveedor.nombre %>
+</p>
+
+<p>
+  <strong>Telefono:</strong>
+  <%= @proveedor.telefono %>
+</p>
+
+<p>
+  <strong>Celular:</strong>
+  <%= @proveedor.celular %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @proveedor.email %>
+</p>
+
+<p>
+  <strong>Domicilio:</strong>
+  <%= @proveedor.domicilio %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @proveedor.descripcion %>
+</p>
+
+<p>
+  <strong>Negocio:</strong>
+  <%= @proveedor.negocio %>
+</p>
+
+<%= link_to 'Edit', edit_negocio_proveedor_path(@negocio,@proveedor) %> |
+<%= link_to 'Back', negocio_proveedors_path(@negocio) %>

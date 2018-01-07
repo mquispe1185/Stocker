@@ -1,0 +1,6 @@
+<%= render 'negocios/menu_negocio',negocio: @negocio %>
+
+
+<%= render 'form', usuario: @negocio_usuario %>
+
+<%= link_to 'Back', negocio_usuarios_path(negocio_id: @negocio_usuario.negocio_id) %>

@@ -1,0 +1,31 @@
+<table class="table">
+  <thead>
+    <tr>
+     
+      <th>Fecha</th>
+      <th>Detalle</th>
+      <th>Monto</th>
+      <th>Usuario</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @detalle_clientes.nil? %>
+	 <tr>
+    	<td>No hay detalles</td>
+  	</tr>
+	<% else %>
+    <% @detalle_clientes.each do |detalle_cliente| %>
+      <tr>
+      <td><%= detalle_cliente.created_at.strftime("%d/%m/%Y") %></td>
+      
+        
+        <td><%= detalle_cliente.detalle %></td>
+        <td>$<%= detalle_cliente.monto %></td>
+       <td><%= detalle_cliente.usuario.nombre %></td>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>

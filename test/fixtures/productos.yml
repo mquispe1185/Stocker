@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  codigo: 1
+  descripcion: MyString
+  stock: 9.99
+  minimo: 9.99
+  unidad: MyString
+  precio: 9.99
+  costo: 9.99
+  negocio: one
+  proveedor: one
+
+two:
+  codigo: 1
+  descripcion: MyString
+  stock: 9.99
+  minimo: 9.99
+  unidad: MyString
+  precio: 9.99
+  costo: 9.99
+  negocio: two
+  proveedor: two

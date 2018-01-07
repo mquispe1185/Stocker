@@ -1,0 +1,31 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Ticket</th>
+      <th>Usuario</th>
+      <th>Fecha</th>
+      <th>Total</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ventas_historico.each do |venta| %>
+      <tr>
+        <td><%= venta.ticket %></td>
+        <td><%= venta.usuario.nombre %></td>
+        <td><%= venta.fecha.strftime("%d/%m/%Y") %></td>
+        <td>$<%= venta.total %></td>
+         <td><%= button_to 'Ver', negocio_venta_detalle_ventas_path(@negocio,venta), method: :get,class: 'btn btn-warning btn-sm' %></td>
+       
+      </tr>
+    <% end %>
+  </tbody>
+   <tfoot>
+    <tr bgcolor="#92fc94">
+    <td colspan="2"></td>
+    <td align="right"><label for="total">Total:</label></td>
+      <td>$<%= @ventas_historico.sum(&:total)%></td>
+    </tr>
+  </tfoot>
+</table>

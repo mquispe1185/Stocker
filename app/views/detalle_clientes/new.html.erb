@@ -1,0 +1,9 @@
+<%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+<h4>Agregar detalles a la cuenta N° <%= @cuenta.id%></h4>
+<h5>Cliente: <%= @cuenta.cliente.nombre%> </h5>
+<%= render 'form', detalle_cliente: @detalle_cliente %>
+
+<div id="tabla_detalles">
+  <%= render 'tabla_detalles', detalle_clientes: @detalle_clientes %>
+</div>
+

@@ -1,0 +1,29 @@
+<%= render 'negocios/menu_negocio',negocio: @negocio %>
+
+<h4>Cuenta de clientes</h4>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Cliente</th>
+      <th>Monto adeudado</th>
+      <th>Observacion</th>
+     
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cuenta_clientes.each do |cuenta_cliente| %>
+      <tr>
+        <td><%= cuenta_cliente.cliente.nombre %></td>
+        <td>$<%= cuenta_cliente.monto_adeudado %></td>
+        <td><%= cuenta_cliente.observacion %></td>
+        <td><%= button_to 'Detalle', negocio_cuenta_cliente_detalle_clientes_path(@negocio,cuenta_cliente), method: :get,class: 'btn btn-warning btn-sm' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

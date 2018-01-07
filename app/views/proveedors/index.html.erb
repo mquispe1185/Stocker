@@ -1,0 +1,38 @@
+<%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+
+<h4>Lista de proveedores</h4>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+ 
+      <th>Descripcion</th>
+     
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @proveedors.each do |proveedor| %>
+      <tr>
+        <td><%= proveedor.nombre %></td>
+       
+        <td><%= proveedor.descripcion %></td>
+        <td><%= button_to 'Ver', negocio_proveedor_path(@negocio,proveedor),method: :get, class: 'btn btn-info btn-sm' %></td>
+
+         <td><%= button_to 'Editar', edit_negocio_proveedor_path(@negocio,proveedor),method: :get, class: 'btn btn-warning btn-sm' %></td>
+        <td><%= button_to 'Eiminar',  negocio_proveedor_path(@negocio,proveedor), method: :delete,class: 'btn btn-danger btn-sm', data: { confirm: 'Seguro desea eliminar este proveedor?' },remote: true %></td>
+
+
+
+        
+       
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+

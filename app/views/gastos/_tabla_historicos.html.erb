@@ -1,0 +1,34 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Descripcion</th>
+      <th>Categoria</th>
+      <th>Usuario</th>
+      <th>Negocio</th>
+      <th>Monto</th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @gastos.each do |gasto| %>
+      <tr>
+        <td><%= gasto.created_at.strftime("%d/%m/%Y") %></td>
+        <td><%= gasto.descripcion %></td>
+        <td><%= gasto.categoria.nombre %></td>
+        <td><%= gasto.usuario.nombre %></td>
+        <td><%= gasto.negocio.nombre %></td>
+        <td>$<%= gasto.monto %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr bgcolor="#92fc94">
+    <td colspan="3"></td>
+    <td><label for="total">Total:</label></td>
+      <td>$<%= @gastos.sum(&:monto)%></td>
+    </tr>
+  </tfoot>
+</table>

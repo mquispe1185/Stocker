@@ -1,0 +1,9 @@
+<%= render 'negocios/menu_negocio',negocio: @negocio %>
+
+<h4>Formas de pago</h4>
+
+<%= render 'form',tipo_pago: @tipo_pago %>
+
+<div id="tabla_tipos">
+  <%= render 'tabla_tipos',tipo_pagos: @tipo_pagos %>
+</div>

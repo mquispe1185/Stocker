@@ -1,0 +1,34 @@
+<%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+<% if current_cierre.nil? %>
+     <h4>Para realizar cobros a cliente primero debe abrir caja</h4>
+<%else %>
+<h4>Ingresar pago a cuenta <%= @cuenta.id%></h4>
+
+<%= render 'form', pago_cliente: @pago_cliente %>
+
+<table class="table">
+  <thead>
+    <tr>
+    
+      <th>Monto</th>
+      
+      <th>Observacion</th>
+      <th>Usuario</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pago_clientes.each do |pago_cliente| %>
+      <tr>
+       
+        <td><%= pago_cliente.monto %></td>
+        
+        <td><%= pago_cliente.observacion %></td>
+       	<td><%= pago_cliente.usuario.nombre %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+

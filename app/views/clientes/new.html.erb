@@ -1,0 +1,9 @@
+<%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+<h4>Crear nuevo cliente</h4>
+
+<%= render 'form', cliente: @cliente %>
+<h5>Clientes existentes</h5>
+<div id="tabla_clientes">
+  <%= render 'tabla_clientes', clientes: @clientes %>
+</div>
+

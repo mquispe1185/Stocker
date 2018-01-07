@@ -1,0 +1,9 @@
+<%= render 'negocios/menu_negocio',negocio: @negocio %>
+
+<h4>Horarios</h4>
+
+<%= render 'form_busqueda',negocio: @negocio %>
+
+<div id="tabla_horarios">
+  <%= render 'tabla_horarios',horarios: @horarios %>
+</div>

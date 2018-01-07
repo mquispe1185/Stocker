@@ -1,0 +1,57 @@
+<%= render 'negocios/menu_negocio',negocio: @negocio %>
+
+<h4>Detalle de cuenta N°: <%=@cuenta.id%></h4>
+<h5>Cliente: <%=@cuenta.cliente.nombre%></h5>
+
+<table class="table">
+  <thead>
+    <tr>
+     <th>Fecha</th>
+      <th>Usuario</th>
+      <th>Detalle</th>
+      <th>Monto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @detalle_clientes.each do |detalle_cliente| %>
+      <tr>
+        <td><%= detalle_cliente.created_at.strftime("%d/%m/%Y") %></td>
+      
+        <td><%= detalle_cliente.usuario.nombre %></td>
+        <td><%= detalle_cliente.detalle %></td>
+        <td>$<%= detalle_cliente.monto %></td>
+       
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h4>Pagos realizados</h4>
+<table class="table">
+  <thead>
+    <tr>
+     <th>Fecha</th>
+      <th>Usuario</th>
+      <th>Detalle</th>
+      <th>Monto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pagos.each do |pago| %>
+      <tr>
+        <td><%= pago.created_at.strftime("%d/%m/%Y") %></td>
+      
+        <td><%= pago.usuario.nombre %></td>
+        <td><%= pago.observacion %></td>
+        <td>- $<%= pago.monto %></td>
+       
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Volver a cuentas', negocio_cuenta_clientes_path(@negocio) %>

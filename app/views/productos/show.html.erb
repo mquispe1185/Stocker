@@ -1,0 +1,59 @@
+<% if logged_in_admin? %>
+        <%= render 'negocios/menu_negocio',negocio: @negocio %>
+<% elsif logged_in? %>
+      <%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+<% end %> 
+<table class="table">
+  <thead>
+    <th colspan="1"></th>
+    <th>Descripcion</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Código:</strong></td>
+      <td><%= @producto.codigo %></td>
+    </tr>
+
+    <tr>
+      <td> <strong>Descripcion:</strong></td>
+      <td> <%= @producto.descripcion %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Stock:</strong></td>
+      <td><%= @producto.stock %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Minimo:</strong></td>
+      <td><%= @producto.minimo %></td>
+    </tr>
+
+     <tr>
+      <td><strong>Unidad:</strong></td>
+      <td><%= @producto.unidad %></td>
+    </tr>
+    <tr>
+      <td> <strong>Precio:</strong></td>
+      <td>$<%= @producto.precio %></td>
+    </tr>
+    <tr>
+      <td><strong>Costo:</strong></td>
+      <td><%= @producto.costo %></td>
+    </tr>
+    <tr>
+      <td><strong>Proveedor:</strong></td>
+      <td><%= @producto.proveedor.nombre %></td>
+    </tr>
+    <tr>
+      <td><strong>Vencimiento:</strong></td>
+      <td><%= @producto.vencimiento.strftime("%d/%m/%Y") %></td>
+    </tr>
+  </tbody>
+ 
+</table>
+
+
+
+<%= link_to 'Editar', edit_negocio_producto_path(@negocio,@producto) %> |
+<%= link_to 'Atras', negocio_productos_path(@negocio) %>

@@ -1,0 +1,31 @@
+<%= form_for(pago_proveedore, url: negocio_pago_proveedores_path(@negocio), html: {class: "miform form-horizontal"}) do |f| %>
+  <% if pago_proveedore.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pago_proveedore.errors.count, "error") %> prohibited this pago_proveedore from being saved:</h2>
+
+      <ul>
+      <% pago_proveedore.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= f.label :monto %>
+    <%= f.text_field :monto %>
+  </div>
+
+  <%= f.hidden_field :cuenta_proveedor_id, value: pago_proveedore.cuenta_proveedor_id %>
+  <div class="field">
+    <%= f.label :observacion %>
+    <%= f.text_field :observacion %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<%= link_to 'Volver a cuenta', new_negocio_cuenta_proveedor_url(@negocio) %>
+

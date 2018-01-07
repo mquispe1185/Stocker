@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  proveedor: one
+  negocio: one
+  monto_adeudado: 9.99
+  observacion: MyString
+
+two:
+  proveedor: two
+  negocio: two
+  monto_adeudado: 9.99
+  observacion: MyString

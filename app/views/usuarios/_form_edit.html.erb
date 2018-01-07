@@ -1,0 +1,36 @@
+<%= form_for(usuario,url: negocio_usuario_path(negocio_id:usuario.negocio_id), html: {class: "miform form-horizontal"}) do |f| %>
+  <h4>Nuevo Usuario</h4>
+  <% if usuario.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(usuario.errors.count, "error") %> prohibited this usuario from being saved:</h2>
+
+      <ul>
+      <% usuario.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :usuario, class: "col-sm-4" %>
+    <%= f.text_field :usuario, class: "col-sm-5" %>
+  </div>
+
+
+
+  <div class="form-group">
+    <%= f.label :nombre, class: "col-sm-4" %>
+    <%= f.text_field :nombre, class: "col-sm-5" %>
+  </div>
+
+
+  <div class="form-group">
+    <%= f.label :rol, class: "col-sm-4"%>
+    <%= f.select :rol, options_for_select([ "ENCARGADO", "CAJERO", "VENDEDOR" ], usuario.rol),class: 'col-sm-5' %>
+  </div>
+
+   <div class="actions" align="center">
+    <%= f.submit "Actualizar datos",class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,43 @@
+ <% if logged_in_admin? %>
+        <%= render 'negocios/menu_negocio',negocio: @negocio %>
+<% elsif logged_in? %>
+      <%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+<% end %> 
+
+<h4>Su stock</h4>
+
+<table class="table" id="tabla_prod">
+  <thead>
+    <tr>
+      <th>Codigo</th>
+      <th>Descripcion</th>
+      
+      <th>Stock</th>
+      
+      <th colspan="3">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @productos.each do |producto| %>
+    <% if producto.stock <= producto.minimo %>
+      <tr bgcolor= "#fcc2c2">
+       <% else %>
+       <tr>
+       <% end %>
+      
+        <td><%= producto.codigo %></td>
+        <td><%= producto.descripcion %></td>
+       
+        <td><%= producto.stock %></td>
+       
+        <td><%= button_to 'Ver', negocio_producto_path(@negocio,producto),method: :get, class: 'btn btn-info btn-sm' %></td>
+
+         <td><%= button_to 'Editar', edit_negocio_producto_path(@negocio,producto),method: :get, class: 'btn btn-warning btn-sm' %></td>
+        <td><%= button_to 'Eiminar',  negocio_producto_path(@negocio,producto), method: :delete,class: 'btn btn-danger btn-sm', data: { confirm: 'Seguro desea eliminar este producto?' },remote: true %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

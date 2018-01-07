@@ -1,0 +1,4 @@
+<%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+<h4>Nuevo Pedido N° <%=@pedido.id%> para proveedor <%=@pedido.proveedor.nombre%></h4>
+<%= render 'tabla_productos',productos: @productos %>
+

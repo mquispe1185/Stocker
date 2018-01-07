@@ -1,0 +1,31 @@
+ <% flash.each do |message_type, message| %>
+                   <div class="alert alert-<%= message_type %>"><%= message %></div>
+  <% end %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cajas.each do |caja| %>
+      <tr>
+        <td><%= caja.nombre %></td>
+       
+        <td><%= button_to 'Editar', edit_negocio_caja_path(@negocio,caja),method: :get, class: 'btn btn-primary btn-sm' %></td>
+        <td><%= button_to 'Eiminar', negocio_caja_path(@negocio,caja), method: :delete,class: 'btn btn-danger btn-sm', data: { confirm: 'Seguro desea eliminar esta caja?' },remote: true %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function(){
+
+    $(".alert").delay(2000).slideUp(500, function(){
+          $(".alert").alert('close');
+      });
+    });
+</script>

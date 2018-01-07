@@ -1,0 +1,13 @@
+<%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+<% if current_cierre.nil? %>
+     <h4>Para cargar gastos primero debe abrir caja</h4>
+<%else %>
+<h4>Carga de gastos de caja N° <%= current_cierre.id%></h4>
+
+<%= render 'form', gasto: @gasto %>
+<div id="tabla_gastos">
+<%= render 'tabla_gastos', gastos: @gastos_usuario %>
+</div>
+
+ <% end %>
+

@@ -1,0 +1,31 @@
+<%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+<h4>Crear pedido</h4>
+
+
+<%= render 'form', pedido: @pedido %>
+
+
+
+<!-- <script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+
+   
+      $(".miform").on('submit' ,function () {
+       var self = $(this),
+       button = self.find('input[type="submit"], button');
+     
+       button.attr('disabled','disabled');
+      
+       
+     });
+
+       $('#tabla_prod').on('click','.btn_add', function(event){
+        event.preventDefault();
+        alert("bien ahi");
+        $(this).closest('tr').remove();
+        return false;
+    });
+
+		});
+
+</script> -->

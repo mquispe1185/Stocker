@@ -1,0 +1,8 @@
+<%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+<h4>Crear cuenta a cliente</h4>
+
+<%= render 'form', cuenta_cliente: @cuenta_cliente %>
+
+<div id="tabla_cuentas">
+  <%= render 'tabla_cuentas', cuenta_clientes: @cuenta_clientes %>
+</div>

@@ -1,0 +1,50 @@
+<%= render 'negocios/menu_negocio',negocio: @negocio %>
+
+<h4>Cierres de caja de hoy</h4>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Usuario</th>
+       <th>Fecha</th>
+      <th>Hora inicial</th>
+      <th>Hora final</th>
+      <th>Monto inicial</th>
+      <th>Monto final</th>
+     
+      <th>Rendido</th>
+     
+      <th>Observacion</th>
+      <th>Caja</th>
+      <th>Negocio</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cierres.each do |cierre| %>
+      <tr>
+         <td><%= cierre.usuario.nombre %></td>
+        <td><%= cierre.fecha.strftime("%d/%m/%Y")  %></td>
+        <td><%= cierre.hora_inicial.strftime("%H:%M") %></td>
+        <% if cierre.hora_final.nil?%>
+        <td>abierta</td>
+        <%else%>
+        <td><%= cierre.hora_final.strftime("%H:%M") %></td>
+        <%end%>
+        <td>$<%= cierre.monto_inicial %></td>
+        <td>$<%= cierre.monto_final %></td>
+       
+        <td><%= cierre.rendido %></td>
+        
+        <td><%= cierre.observacion %></td>
+        <td><%= cierre.caja.id %></td>
+        <td><%= cierre.negocio.nombre %></td>
+       
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

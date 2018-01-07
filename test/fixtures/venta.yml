@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ticket: 1
+  usuario: one
+  fecha: 2017-12-04
+  total: 9.99
+
+two:
+  ticket: 1
+  usuario: two
+  fecha: 2017-12-04
+  total: 9.99

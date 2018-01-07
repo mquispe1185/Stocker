@@ -1,0 +1,13 @@
+<%= form_for (:ventas), url:negocio_buscar_ventas_path(@negocio), html: {class: "miform form-horizontal"}, remote: true do |f| %>
+  <div class="form-group">
+    <%= f.label :fecha_inicio, class: "col-sm-4" %>
+    <%= f.text_field :fecha_inicio, class: "col-sm-5" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :fecha_final, class: "col-sm-4" %>
+    <%= f.text_field :fecha_final, class: "col-sm-5" %>
+  </div>
+   <div class="actions" align="center">
+    <%= f.submit "Buscar",class: "btn btn-primary" %>
+  </div>
+<% end %>

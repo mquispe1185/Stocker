@@ -1,0 +1,56 @@
+<%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+
+<h4>Pedidos pendientes a envio</h4>
+
+<table class="table">
+  <thead>
+    <tr>
+     <th>N° pedidos</th>
+      <th>Proveedor</th>
+       <th>Creador</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pedidos.each do |pedido| %>
+      <tr>
+        <td><%= pedido.id %></td>
+        <td><%= pedido.proveedor.nombre %></td>
+        <td><%= pedido.usuario.nombre %></td>
+        <td><%= button_to 'Ver detalle', negocio_pedido_detalle_pedidos_path(@negocio,pedido), method: :get,class: 'btn btn-info btn-sm' %></td>
+        
+        <td><%= button_to 'Realizado', negocio_pedido_path(@negocio,pedido, realizado: true),method: :put,class: 'btn btn-success btn-sm' %></td>
+        <td><%= button_to 'X', negocio_pedido_path(@negocio,pedido),method: :delete,class: 'btn btn-danger btn-sm' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h4>Pedidos ya enviados</h4>
+
+<table class="table">
+  <thead>
+    <tr>
+     <th>N° pedidos</th>
+      <th>Proveedor</th>
+       <th>Creador</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pedidos_enviados.each do |pedido| %>
+      <tr>
+        <td><%= pedido.id %></td>
+        <td><%= pedido.proveedor.nombre %></td>
+        <td><%= pedido.usuario.nombre %></td>
+       <td><%= button_to 'Ver detalle', negocio_pedido_detalle_pedidos_path(@negocio,pedido),class: 'btn btn-info btn-sm' %></td>
+         <td><%= button_to 'Recibido', negocio_pedido_path(@negocio,pedido,recibido: true),method: :put,class: 'btn btn-warning btn-sm' %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

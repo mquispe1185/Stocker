@@ -1,0 +1,30 @@
+ <%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
+ 
+<% if current_cierre.nil? or current_cierre.monto_inicial.nil?%>
+	<p>Hola, para comenzar la facturación, carga de gastos, pago a proveeedores, cobro a clientes, etc.
+primero debe abrir la caja para eso siga este enlace</p>
+     <%= button_to 'Abrir Caja', login_path, method: :get, class: 'btn btn-info top-button'%>
+<%else %>
+<p><li>No olvide hacer el cierre de caja</li>
+	<li>Recuerde cerrar su sesión</li>
+</p>
+<p>
+  <strong>Usuario:</strong>
+  <%= @usuario.usuario %>
+</p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @usuario.nombre %>
+</p>
+
+<p>
+  <strong>Negocio:</strong>
+  <%= @usuario.negocio.nombre %>
+</p>
+
+<p>
+  <strong>Rol:</strong>
+  <%= @usuario.rol %>
+</p>
+<%end%>

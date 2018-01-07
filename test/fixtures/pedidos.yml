@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  usuario: one
+  proveedor: one
+  negocio: one
+
+two:
+  usuario: two
+  proveedor: two
+  negocio: two
