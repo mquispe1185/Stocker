@@ -1,0 +1,32 @@
+<%= form_for(detalle_cierre) do |f| %>
+  <% if detalle_cierre.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(detalle_cierre.errors.count, "error") %> prohibited this detalle_cierre from being saved:</h2>
+
+      <ul>
+      <% detalle_cierre.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :cierre_id %>
+    <%= f.text_field :cierre_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :descripcion %>
+    <%= f.text_field :descripcion %>
+  </div>
+
+  <div class="field">
+    <%= f.label :monto %>
+    <%= f.text_field :monto %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

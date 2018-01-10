@@ -1,15 +1,23 @@
 class CajasController < ApplicationController
   before_action :set_caja, only: [:show, :edit, :update, :destroy]
   before_action :set_negocio
+  before_action :logged_in_user, only: [:index]
   # GET /cajas
   # GET /cajas.json
   def index
-    @cajas = Caja.all
+   # @cajas = Caja.all
+   fecha = DateTime.now.strftime  "%Y/%m/%d"
+    @cajas = @negocio.cajas.joins(:ventas).where(ventas: {fecha: fecha}).where(ventas: {usuario_id: @current_user.id}).distinct
+    @cajas.each do |c|  
+      c.ventas_total(fecha, @current_user.id)
+      #puts c.nombre+c.total.to_s
+    end
   end
 
   # GET /cajas/1
   # GET /cajas/1.json
   def show
+    
   end
 
   # GET /cajas/new
@@ -59,6 +67,8 @@ class CajasController < ApplicationController
       end
   
   end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

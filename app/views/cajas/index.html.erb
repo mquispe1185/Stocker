@@ -1,8 +1,8 @@
-<p id="notice"><%= notice %></p>
+<%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
 
 <h1>Cajas</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Nombre</th>
@@ -11,17 +11,12 @@
   </thead>
 
   <tbody>
-    <% @cajas.each do |caja| %>
+    <% @cajas.each do |c| %>
       <tr>
-        <td><%= caja.nombre %></td>
-        <td><%= link_to 'Show', caja %></td>
-        <td><%= link_to 'Edit', edit_caja_path(caja) %></td>
-        <td><%= link_to 'Destroy', caja, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= "Caja #{c.nombre}: Total $#{c.total}" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
 
-<%= link_to 'New Caja', new_caja_path %>

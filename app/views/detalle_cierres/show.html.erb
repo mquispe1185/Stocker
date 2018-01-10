@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cierre:</strong>
+  <%= @detalle_cierre.cierre %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @detalle_cierre.descripcion %>
+</p>
+
+<p>
+  <strong>Monto:</strong>
+  <%= @detalle_cierre.monto %>
+</p>
+
+<%= link_to 'Edit', edit_detalle_cierre_path(@detalle_cierre) %> |
+<%= link_to 'Back', detalle_cierres_path %>

@@ -22,9 +22,9 @@
 
   
 
-
-
-		  <div class="col-md-6 col-md-offset-3" style="padding-top: 20px;" >
+    <div class="row">
+     
+		  <div class="col-sm-6 col-sm-push-3 " style="padding-top: 20px;" >
                   <% flash.each do |message_type, message| %>
                    <div class="alert alert-<%= message_type %>"><%= message %></div>
                 <% end %>
@@ -33,7 +33,10 @@
 			        
 
           </div>
-   
+       <div class="col-sm-3 col-sm-pull-6"><p></p>br>
+       </p> aqui est ala izquierda</div>
+        <div class="col-sm-3">aqui estamos </br>esta es la derecha</div>
+   </div>
 
   </body>
 </html>

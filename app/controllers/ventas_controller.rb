@@ -1,5 +1,5 @@
 class VentasController < ApplicationController
-  before_action :logged_in_user, only: [:create, :ventas_usuario] 
+  before_action :logged_in_user, only: [:create, :ventas_usuario, :filtrar_caja] 
   before_action :set_venta, only: [:show, :edit, :update, :destroy]
   before_action :set_negocio, except: [:create]
   autocomplete :producto, :descripcion, :full => true,:extra_data => [:precio]
@@ -106,6 +106,22 @@ class VentasController < ApplicationController
     fecha = DateTime.now.strftime  "%Y/%m/%d"
     @ventas = @negocio.ventas.where(fecha: fecha).where(usuario_id: @current_user.id)
     render 'ventas_usuario'
+  end
+
+  def filtrar_caja
+    fecha = DateTime.now.strftime  "%Y/%m/%d"
+    if params[:caja][:caja_id].empty?
+      
+      @ventas = @negocio.ventas.where(fecha: fecha).where(usuario_id: @current_user.id)
+    else  
+    @ventas = @negocio.ventas.where(fecha: fecha).where(usuario_id: @current_user.id).where(caja_id: params[:caja][:caja_id])
+    
+    respond_to do |format|
+     
+        format.html { render :ventas_usuario }
+        format.js
+      end
+    end
   end
 
   private

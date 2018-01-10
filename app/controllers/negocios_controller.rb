@@ -34,8 +34,10 @@ class NegociosController < ApplicationController
       if @negocio.save
         @nueva_caja = Caja.new(nombre: "PRINCIPAL", negocio_id: @negocio.id)
         @nueva_caja.save
-        @tipo_pago = TipoPago.new(nombre: "CONTADO", negocio_id: @negocio.id, modificador: 1)
+        @tipo_pago = TipoPago.new(descripcion: "CONTADO", negocio_id: @negocio.id, modificador: 1)
         @tipo_pago.save
+        @proveedor = Proveedor.new(nombre: "GENERAL", negocio_id: @negocio_id, descripcion: "proveedor general")
+        @proveedor.save
         flash[:success] = "Nuevo negocio creado!"
        redirect_to admin_path @admin
     end

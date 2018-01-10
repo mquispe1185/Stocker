@@ -1,25 +1,19 @@
 <%= render 'negocios/menu_negocio_usuario',negocio: @negocio %>
 
-<h1>Ventas</h1>
+<h4>Ventas diarias</h4>
+<%= form_for (:caja), url:negocio_filtrar_caja_path(@negocio), html: {method: :get,class: "miform form-horizontal"}, remote: true do |f| %>
+  <div class="form-group">
+    <%= f.label :caja_id,"Filtrar por caja:", class: "col-sm-4" %>
+    <%= f.collection_select :caja_id, Caja.where(negocio_id: @negocio.id), :id, :nombre, prompt: "TODAS", class: "col-sm-4"%>
+  </div>
+ 
+   <div class="actions" align="center">
+    <%= f.submit "Filtrar",class: "btn btn-primary" %>
+  </div>
+<% end %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Ticket</th>
-    
-      <th>Total</th>
-      <th colspan="3">Detalle</th>
-    </tr>
-  </thead>
+<div id="tablav_usuario">
+  <%= render 'tablav_usuario',ventas: @ventas %>
+</div>
 
-  <tbody>
-    <% @ventas.each do |venta| %>
-      <tr>
-        <td><%= venta.ticket %></td>
-       
-        <td><%= venta.total %></td>
-        <td><%= button_to 'Ver', negocio_venta_detalle_ventas_path(@negocio,venta), method: :get,class: 'btn btn-warning btn-sm' %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cierre: one
+  descripcion: MyString
+  monto: 9.99
+
+two:
+  cierre: two
+  descripcion: MyString
+  monto: 9.99

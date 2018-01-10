@@ -18,6 +18,9 @@
 //= require autocomplete-rails
 //= require dataTables/jquery.dataTables
 //= require bootstrap
+//= require rails.validations
+//= require rails.validations.simple_form
+//= require bootstrap-modal
 
 $(document).on('turbolinks:load', function(){
 

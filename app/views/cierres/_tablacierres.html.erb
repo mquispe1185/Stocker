@@ -8,10 +8,8 @@
       <th>Monto inicial</th>
       <th>Monto final</th>
      
-      <th>Rendido</th>
-     
       <th>Observacion</th>
-  
+      
     
     </tr>
   </thead>
@@ -29,11 +27,10 @@
         <%end%>
         <td>$<%= cierre.monto_inicial %></td>
         <td>$<%= cierre.monto_final %></td>
-       
-        <td><%= cierre.rendido %></td>
+      
         
         <td><%= cierre.observacion %></td>
-       
+     <td><%= button_to 'Detalle', negocio_cierre_detalle_cierres_path(@negocio,cierre), method: :get,class: 'btn btn-warning btn-sm' %></td>
      
      
       </tr>

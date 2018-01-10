@@ -121,6 +121,13 @@ class CierresController < ApplicationController
       end
       puts @cierre
       puts "pasamos por aqui"
+      DetalleCierresController.create(@cierre.id,"Monto Inicial",@cierre.monto_inicial)
+      DetalleCierresController.create(@cierre.id,"Ventas",ventas_estado.sum(&:total))
+      DetalleCierresController.create(@cierre.id,"Gastos",gastos_estado.sum(&:monto))
+      DetalleCierresController.create(@cierre.id,"Pago de clientes",pago_cliente_rendido.sum(&:monto))
+      DetalleCierresController.create(@cierre.id,"Pago a proveedores",pago_proveedores_rendido.sum(&:monto))
+
+
      if @cierre.update(hora_final: t, monto_final: params[:neto], estado: true)
         puts "actualizamos hora final de cierre"
         flash[:success] = 'Caja cerrada exitosamente'

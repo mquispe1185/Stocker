@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  
   #rutas de login admin
   get '/login_admin', to: 'session_admin#new'
   post '/login_admin', to: 'session_admin#create'
@@ -19,7 +20,9 @@ Rails.application.routes.draw do
       resources :usuarios
       resources :categorias
       resources :cajas
-       resources :cierres
+       resources :cierres do
+          resources :detalle_cierres
+       end
        get '/cierre_caja', to: 'cierres#cierre_caja_usuario'
        put '/realizar_cierre', to: 'cierres#realizar_cierre'
        get '/balances', to: 'cierres#balances'
@@ -48,6 +51,7 @@ Rails.application.routes.draw do
        get '/historico_cierres', to: 'cierres#historico_cierres'
        post '/buscar_cierres', to: 'cierres#buscar_cierres'
        get '/historico_ventas', to: 'ventas#historico_ventas'
+       get '/filtrar_caja', to: 'ventas#filtrar_caja'
        post '/buscar_ventas', to: 'ventas#buscar_ventas'
        post '/buscar_gastos', to: 'gastos#buscar_gastos'
        post '/buscar_horarios', to: 'horario#buscar_horarios'

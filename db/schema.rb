@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171231043703) do
+ActiveRecord::Schema.define(version: 20180109014925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,15 @@ ActiveRecord::Schema.define(version: 20171231043703) do
     t.decimal  "monto_inicial"
     t.index ["negocio_id"], name: "index_cuenta_proveedores_on_negocio_id", using: :btree
     t.index ["proveedor_id"], name: "index_cuenta_proveedores_on_proveedor_id", using: :btree
+  end
+
+  create_table "detalle_cierres", force: :cascade do |t|
+    t.integer  "cierre_id"
+    t.string   "descripcion"
+    t.decimal  "monto"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["cierre_id"], name: "index_detalle_cierres_on_cierre_id", using: :btree
   end
 
   create_table "detalle_clientes", force: :cascade do |t|
@@ -284,6 +293,7 @@ ActiveRecord::Schema.define(version: 20171231043703) do
   add_foreign_key "cuenta_clientes", "negocios"
   add_foreign_key "cuenta_proveedores", "negocios"
   add_foreign_key "cuenta_proveedores", "proveedors"
+  add_foreign_key "detalle_cierres", "cierres"
   add_foreign_key "detalle_clientes", "cuenta_clientes"
   add_foreign_key "detalle_clientes", "usuarios"
   add_foreign_key "detalle_pedidos", "pedidos", on_delete: :cascade

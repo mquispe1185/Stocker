@@ -35,6 +35,13 @@
   </tbody>
 </table>
 
-<br>
-<%= link_to "Volver a ventas",negocio_ventas_usuario_url(@negocio) %>
+<% if logged_in_admin? %>
+       <%= link_to "Volver a históricos",negocio_historico_ventas_path(@negocio) %>
+     <% else%>
+      <% if logged_in? %>
+    <%= link_to "Volver a ventas",negocio_ventas_usuario_path(@negocio) %>
+    <% end %> 
+  <% end %> 
+
+
 

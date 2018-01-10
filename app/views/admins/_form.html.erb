@@ -1,19 +1,9 @@
-<%= form_for(admin , html: {class: "miform form-horizontal"}) do |f| %>
-  <% if admin.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(admin.errors.count, "errore") %> en su formulario de resgistro:</h2>
-
-      <ul>
-      <% admin.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= simple_form_for(admin , html: {class: "miform form-horizontal"},validate: true)  do |f| %>
+  <%= f.error_notification %>
   <h4>Nuevo Administrador</h4>
   <div class="form-group">
     <%= f.label :usuario, class: "col-sm-4" %>
-    <%= f.text_field :usuario, class: "col-sm-5" %>
+    <%= f.text_field :usuario, validate: { presence: true}, class: "col-sm-5" %>
   </div>
 
   <div class="form-group">

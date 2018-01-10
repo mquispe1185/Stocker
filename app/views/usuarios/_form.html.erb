@@ -1,16 +1,6 @@
-<%= form_for(usuario,url: negocio_usuarios_path(negocio_id:usuario.negocio_id), html: {class: "miform form-horizontal"}) do |f| %>
+<%= simple_form_for(usuario,url: negocio_usuarios_path(negocio_id:usuario.negocio_id), html: {class: "miform form-horizontal"}, validate: true) do |f| %>
   <h4>Nuevo Usuario</h4>
-  <% if usuario.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(usuario.errors.count, "error") %> prohibited this usuario from being saved:</h2>
-
-      <ul>
-      <% usuario.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= f.error_notification %>
 
   <div class="form-group">
     <%= f.label :usuario, class: "col-sm-4" %>
